@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>ごみ収集カレンダー</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#f8fafc">
+
+  <!-- PWA (optional) -->
+  <link rel="manifest" href="manifest.json">
+
+  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="icon" type="image/png" href="icon.png">
+
+  <!-- Icon font -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- App styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="pdfArea">
+  <div class="header">
+    <div class="month-nav">
+      <button class="btn-icon" id="prevMonth" aria-label="前の月へ">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      <div class="month-title" id="monthLabel"></div>
+      <button class="btn-icon" id="nextMonth" aria-label="次の月へ">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+    </div>
+
+    <div class="header-actions">
+       <button class="btn-icon btn-today" id="todayBtn" title="今日に戻る">今日</button>
+       
+      <!-- Print to PDF (A4 landscape) -->
+      <button class="btn-icon btn-print" id="printBtn" aria-label="PDFに保存" title="この月をPDFで保存">
+        <i class="fa-solid fa-print"></i>
+      </button>
+      <!-- Settings -->
+      <button class="btn-settings" id="openSettings" aria-label="設定">
+        <i class="fa-solid fa-sliders"></i>
+      </button>
+    </div>
+  </div>
+
+  <div id="bannerContainer"></div>
+
+  <div class="calendar-container">
+    <div class="calendar-inner">
+      <div class="weekdays">
+        <div class="sun">日</div>
+        <div>月</div>
+        <div>火</div>
+        <div>水</div>
+        <div>木</div>
+        <div>金</div>
+        <div class="sat">土</div>
+      </div>
+      <div class="days-grid" id="calendarGrid"></div>
+    </div>
+  </div>
+</div>
+
+<div class="legend" id="legendContainer"></div>
+
+<!-- 印刷選択モーダル -->
+<div class="modal-overlay" id="printChoiceModal">
+  <div class="modal-card modal-card-sm">
+    <div class="modal-header">
+      <div class="modal-title">PDF出力範囲</div>
+      <button class="modal-close-btn" id="closePrintChoice">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="print-choice-actions">
+        <button class="btn-save" id="printMonthBtn">今月</button>
+        <button class="btn-save" id="printYearBtn">今年（12ヶ月）</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 詳細モーダル -->
+<div class="modal-overlay" id="detailModal">
+  <div class="modal-card">
+    <div class="modal-header">
+      <div class="modal-title">収集内容</div>
+      <button class="modal-close-btn" id="closeDetail">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="detail-date" id="detailDateStr"></div>
+      <div class="detail-meta" id="detailMetaStr"></div>
+      <div id="detailList"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-save" style="width:100%" id="okDetail">閉じる</button>
+    </div>
+  </div>
+</div>
+
+<!-- 設定モーダル -->
+<div class="modal-overlay" id="settingsModal">
+  <div class="modal-card">
+    <div class="modal-header">
+      <div class="modal-title">収集ルール設定</div>
+      <button class="modal-close-btn" id="closeSettings">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <div class="modal-body">
+      <button class="btn-add-type" id="addCategory">
+        <i class="fa-solid fa-plus"></i> 分類を追加
+      </button>
+      <div class="settings-list" id="settingsList"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-reset" id="resetSettings">初期化</button>
+      <button class="btn-save" id="saveSettings">保存して閉じる</button>
+    </div>
+  </div>
+</div>
+
+<!-- html2pdf ライブラリ（PDF出力用） -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<!-- App logic -->
+<script src="app.js" defer></script>
+</body>
+</html>
