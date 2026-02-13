@@ -612,30 +612,30 @@ body.exporting-pdf .legend {
 }
 
 body.exporting-pdf .days-grid {
-  auto-rows: minmax(86px, auto) !important;
+  auto-rows: minmax(104px, auto) !important;
 }
 
 body.exporting-pdf .month-title {
-  font-size: 24px;
+  font-size: 26px;
 }
 
 body.exporting-pdf #pdfArea {
-  width: 1020px !important;
-  max-width: 1020px !important;
+  width: 1080px !important;
+  max-width: 1080px !important;
   margin: 0 !important;
 }
 
 body.exporting-pdf .weekdays div {
-  padding: 10px 0;
+  padding: 12px 0;
 }
 
 body.exporting-pdf .date-num {
-  font-size: 16px;
+  font-size: 17px;
 }
 
 body.exporting-pdf .mini-label {
-  font-size: 10px;
-  padding: 2px 4px;
+  font-size: 11px;
+  padding: 3px 6px;
 }
 
 body.exporting-pdf .calendar-container {
@@ -645,7 +645,7 @@ body.exporting-pdf .calendar-container {
 }
 
 body.exporting-pdf .calendar-inner {
-  margin: 0 !important;
+  margin: 6px !important;
   max-width: none !important;
   width: 100% !important;
 }
@@ -676,11 +676,13 @@ body.exporting-pdf .tomorrow-banner {
 }
 
 .yearly-print-page {
-  width: 1020px;
-  min-height: 700px;
+  width: 1080px;
+  height: 760px;
   box-sizing: border-box;
   overflow: hidden;
   background: #ffffff;
+  break-inside: avoid;
+  page-break-inside: avoid;
   break-after: page;
   page-break-after: always;
 }
@@ -692,12 +694,12 @@ body.exporting-pdf .tomorrow-banner {
 
 body.exporting-yearly-pdf .yearly-print-page #pdfArea {
   margin: 0;
-  max-width: 1020px;
+  max-width: 1080px;
 }
 
 body.exporting-pdf .yearly-print-page [id^="pdfAreaSnapshot"] {
   margin: 0;
-  max-width: 1020px;
+  max-width: 1080px;
   width: 100%;
 }
 
@@ -715,12 +717,12 @@ body.exporting-pdf .month-nav {
 }
 
 body.exporting-pdf .month-title {
-  font-size: 24px;
+  font-size: 26px;
 }
 
 /* PDF 用：レイアウトはそのまま */
 body.exporting-pdf #pdfArea {
-  margin-bottom: 0;
+  margin-bottom: 0 !important;
 }
 
 /* === Responsive === */

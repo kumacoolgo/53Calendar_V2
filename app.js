@@ -675,7 +675,7 @@ async function exportCurrentMonthPdf() {
   const watchdog = setTimeout(() => {
     isExporting = false;
     alert("PDF出力がタイムアウトしました。もう一度お試しください。");
-  }, 45000);
+  }, 120000);
 
   if (typeof html2pdf === "undefined") {
     alert("PDF ライブラリの読み込みに失敗しました。ネットワークを確認してください。");
@@ -694,7 +694,7 @@ async function exportCurrentMonthPdf() {
   const y = currentDate.getFullYear();
   const m = currentDate.getMonth() + 1;
   const filename = `gomi-calendar-${y}-${String(m).padStart(2, "0")}.pdf`;
-  const marginMm = 6;
+  const marginMm = 4;
   const tempRoot = document.createElement("div");
   tempRoot.id = "singlePdfArea";
 
@@ -717,9 +717,15 @@ async function exportCurrentMonthPdf() {
       .set({
         margin: marginMm,
         filename,
-        image: { type: "jpeg", quality: 0.98 },
-        html2canvas: { scale: 1, useCORS: true, imageTimeout: 5000, logging: false },
-        jsPDF: { unit: "mm", format: "a4", orientation: "landscape" },
+        image: { type: "png", quality: 1 },
+        html2canvas: {
+          scale: 3,
+          useCORS: true,
+          imageTimeout: 15000,
+          backgroundColor: "#ffffff",
+          logging: false
+        },
+        jsPDF: { unit: "mm", format: "a4", orientation: "landscape", compress: false },
         pagebreak: { mode: ["css"], avoid: [".yearly-print-page"] }
       })
       .from(tempRoot)
@@ -742,7 +748,7 @@ async function exportWholeYearPdf() {
   const watchdog = setTimeout(() => {
     isExporting = false;
     alert("年間PDF出力がタイムアウトしました。もう一度お試しください。");
-  }, 45000);
+  }, 600000);
 
   if (typeof html2pdf === "undefined") {
     alert("PDF ライブラリの読み込みに失敗しました。ネットワークを確認してください。");
@@ -761,7 +767,7 @@ async function exportWholeYearPdf() {
   const backupDate = new Date(currentDate);
   const year = backupDate.getFullYear();
   const filename = `gomi-calendar-${year}-12months.pdf`;
-  const marginMm = 6;
+  const marginMm = 4;
   const tempRoot = document.createElement("div");
   tempRoot.id = "yearlyPdfArea";
 
@@ -792,7 +798,13 @@ async function exportWholeYearPdf() {
         margin: marginMm,
         filename,
         image: { type: "jpeg", quality: 0.98 },
-        html2canvas: { scale: 1, useCORS: true, imageTimeout: 5000, logging: false },
+        html2canvas: {
+          scale: 2,
+          useCORS: true,
+          imageTimeout: 15000,
+          backgroundColor: "#ffffff",
+          logging: false
+        },
         jsPDF: { unit: "mm", format: "a4", orientation: "landscape" },
         pagebreak: { mode: ["css"], avoid: [".yearly-print-page"] }
       })
